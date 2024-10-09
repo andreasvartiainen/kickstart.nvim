@@ -175,6 +175,9 @@ return {
         -- capabilities = {},
         settings = {
           Lua = {
+            diagnostics = {
+              globals = { 'vim' }, -- sets vim as a global variable so lua_ls doesn't yell about it
+            },
             completion = {
               callSnippet = 'Replace',
             },
