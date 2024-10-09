@@ -32,10 +32,9 @@ vim.schedule(function()
   vim.opt.clipboard = 'unnamedplus'
 end)
 
--- :NOTE:
---  set the terminal emulator to use powershell
---  does not work for linux
+-- set terminal to powershell
 vim.g.terminal_emulator = 'powershell'
+vim.opt.shell = 'powershell.exe'
 
 -- Enable break indent
 vim.opt.breakindent = true
