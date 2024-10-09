@@ -124,6 +124,7 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   end,
 })
 
+require 'lazy-bootstrap'
 require 'lazy-plugins'
 
 -- The line beneath this is called `modeline`. See `:help modeline`
