@@ -33,6 +33,7 @@ return { -- Autocompletion
     --  into multiple repos for maintenance purposes.
     'hrsh7th/cmp-nvim-lsp',
     'hrsh7th/cmp-path',
+    'hrsh7th/cmp-nvim-lua',
   },
   config = function()
     -- See `:help cmp`
@@ -123,6 +124,7 @@ return { -- Autocompletion
           -- set group index to 0 to skip loading LuaLS completions as lazydev recommends it
           group_index = 0,
         },
+        { name = 'nvim_lua' },
         { name = 'nvim_lsp' },
         { name = 'luasnip' },
         { name = 'path' },
