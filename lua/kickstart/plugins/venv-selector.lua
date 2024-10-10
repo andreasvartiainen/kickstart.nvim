@@ -9,6 +9,18 @@ return {
   lazy = false,
   branch = 'regexp', -- This is the regexp branch, use this for the new version
   config = function()
+    local dap = require 'dap'
+    dap.configurations.python = {
+      {
+        type = 'python',
+        request = 'launch',
+        name = 'Launch file',
+        program = '${file}',
+        pythonPath = function()
+          return '{workspaceFolder}'
+        end,
+      },
+    }
     require('venv-selector').setup()
   end,
 
