@@ -64,7 +64,7 @@ return {
       -- online, please don't ask me how to install them :)
       ensure_installed = {
         -- Update this to ensure that you have the debuggers for the langs you want
-        'cpptools',
+        -- 'cpptools',
         'python',
         'delve',
       },
@@ -116,33 +116,33 @@ return {
     })
 
     -- setup cpp adapter
-    dap.adapters.cpptools = {
+    dap.adapters.cppdbg = {
+      name = 'cppdbg',
       type = 'executable',
-      name = 'cpptools',
       command = vim.fn.stdpath 'data' .. '/mason/bin/OpenDebugAD7.cmd',
-      args = {},
-      attach = {
-        pidProperty = 'processId',
-        pidSelect = 'ask',
-      },
+      -- command = 'gdb',
     }
     -- this configuration should start cpptools and the debug the executable main in the current directory when executing :DapContinue
     dap.configurations.cpp = {
       {
         name = 'Launch',
-        type = 'cpptools',
+        type = 'cppdbg',
         request = 'launch',
+        -- MIDebuggerPath = 'lldb-mi',
         program = '${workspaceFolder}/main.exe',
         cwd = '${workspaceFolder}',
         stopOnEntry = true,
         args = {},
         runInTerminal = false,
+        -- program = function()
+        --   return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
+        -- end,
       },
     }
     dap.configurations.c = {
       {
         name = 'Launch',
-        type = 'cpptools',
+        type = 'cppdbg',
         request = 'launch',
         program = '${workspaceFolder}/main.exe',
         cwd = '${workspaceFolder}',
