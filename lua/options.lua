@@ -33,9 +33,9 @@ vim.schedule(function()
 end)
 
 -- set terminal to powershell
-vim.g.terminal_emulator = 'powershell'
-vim.opt.shell = 'powershell.exe'
-vim.opt.shellcmdflag = '-NoLogo -NoProfile -ExecutionPolicy RemoteSigned -Command '
+-- vim.g.terminal_emulator = 'powershell'
+-- vim.opt.shell = 'powershell.exe'
+-- vim.opt.shellcmdflag = '-NoLogo -NoProfile -ExecutionPolicy RemoteSigned -Command '
 vim.opt.shellxquote = ''
 vim.opt.shellquote = ''
 vim.opt.shellredir = '2>&1 | Out-File -Encoding UTF8 %s'
@@ -70,6 +70,8 @@ vim.opt.splitbelow = true
 --  and `:help 'listchars'`
 vim.opt.list = true
 vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
+vim.opt.tabstop = 4
+vim.opt.shiftwidth = 4
 
 -- Preview substitutions live, as you type!
 vim.opt.inccommand = 'split'
