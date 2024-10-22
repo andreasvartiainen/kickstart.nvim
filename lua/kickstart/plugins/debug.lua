@@ -66,7 +66,7 @@ return {
         -- Update this to ensure that you have the debuggers for the langs you want
         'cpptools',
         'python',
-        'delve',
+        -- 'delve',
       },
     }
 
@@ -97,23 +97,46 @@ return {
     dap.listeners.before.event_exited['dapui_config'] = dapui.close
 
     -- Install golang specific config
-    require('dap-go').setup {
-      delve = {
-        -- On Windows delve must be run attached or it crashes.
-        -- See https://github.com/leoluz/nvim-dap-go/blob/main/README.md#configuring
-        detached = vim.fn.has 'win32' == 0,
-      },
-    }
+    -- require('dap-go').setup {
+    --   delve = {
+    --     -- On Windows delve must be run attached or it crashes.
+    --     -- See https://github.com/leoluz/nvim-dap-go/blob/main/README.md#configuring
+    --     detached = vim.fn.has 'win32' == 0,
+    --   },
+    -- }
     require('dap-python').setup 'python'
 
-    table.insert(require('dap').configurations.python, {
-      type = 'python',
-      request = 'launch',
-      name = 'Module',
-      console = 'externalTerminal',
-      module = 'src', -- edit this to be your app's main module
-      cwd = '${workspaceFolder}',
-    })
+    -- table.insert(require('dap').configurations.python, {
+    --   type = 'python',
+    --   request = 'launch',
+    --   name = 'Module',
+    --   console = 'externalTerminal',
+    --   module = 'src', -- edit this to be your app's main module
+    --   cwd = '${workspaceFolder}',
+    -- })
+    dap.configurations.python = {
+      {
+        type = 'python',
+        request = 'launch',
+        name = 'Launch Filepath',
+        console = 'integratedTerminal',
+        -- module = 'src', -- edit this to be your app's main module
+        cwd = '${workspaceFolder}',
+        program = function()
+          return vim.fn.input('File Path: ', vim.fn.getcwd() .. '/', 'file')
+        end,
+      },
+      {
+        type = 'python',
+        request = 'launch',
+        name = 'Launch Current File',
+        console = 'integratedTerminal',
+        -- cwd = '${workspaceFolder}',
+        program = '${file}',
+      },
+    }
+
+    -- NOTE: if cpp debugging doesn't work check with :Mason that the debugger is installed
 
     -- setup cpp adapter
     -- dap.adapters.cpptools = {
