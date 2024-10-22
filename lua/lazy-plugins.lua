@@ -12,7 +12,7 @@ require('lazy').setup({
   require 'kickstart.plugins.gitsigns', -- adds gitsigns recommend keymaps
   require 'kickstart.plugins.which-key', -- shows keys to press after pressing a key
   require 'kickstart.plugins.fuzzy-finder',
-  require 'kickstart.plugins.venv-selector', -- plugin for selecting virtual environments for python
+  require 'kickstart.plugins.venv-selector-config', -- plugin for selecting virtual environments for python
   require 'kickstart.plugins.lsp-config', -- language server configuration
   require 'kickstart.plugins.autoformat', -- autoformatting
   require 'kickstart.plugins.vim-cmp-config', -- autocomplete
