@@ -27,6 +27,12 @@ require('lazy').setup({
   { 'kylechui/nvim-surround', version = '*', event = 'VeryLazy', config = true },
   { 'Bilal2453/luvit-meta', lazy = true },
   { 'folke/todo-comments.nvim', event = 'VimEnter', dependencies = { 'nvim-lua/plenary.nvim' }, opts = { signs = false } }, -- Highlight todo, notes, etc in comments
+  {
+    'evesdropper/luasnip-latex-snippets.nvim',
+    config = function()
+      require('luasnip.loaders.from_lua').lazy_load()
+    end,
+  },
 
   -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
   --    This is the easiest way to modularize your config.
