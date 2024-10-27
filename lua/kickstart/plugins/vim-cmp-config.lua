@@ -21,13 +21,21 @@ return { -- Autocompletion
         {
           'rafamadriz/friendly-snippets',
           config = function()
+            -- require('luasnip.loaders.from_vscode').lazy_load { exclude = { 'tex' } }
             require('luasnip.loaders.from_vscode').lazy_load()
           end,
         },
+        -- {
+        --   'evesdropper/luasnip-latex-snippets.nvim',
+        --   config = function()
+        --     require('luasnip.loaders.from_lua').lazy_load {
+        --       paths = { '/home/tomi/.local/share/nvim/lazy/luasnip-latex-snippets.nvim/lua/luasnip-latex-snippets' },
+        --     }
+        --   end,
+        -- },
       },
     },
     'saadparwaiz1/cmp_luasnip',
-
     -- Adds other completion capabilities.
     --  nvim-cmp does not ship with all sources by default. They are split
     --  into multiple repos for maintenance purposes.
