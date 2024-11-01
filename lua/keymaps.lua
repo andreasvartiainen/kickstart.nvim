@@ -31,3 +31,5 @@ vim.keymap.set('n', '<leader>h', '<C-w><C-h>', { desc = 'Move focus to the left 
 vim.keymap.set('n', '<leader>l', '<C-w><C-l>', { desc = 'Move focus to the right window' })
 vim.keymap.set('n', '<leader>j', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
 vim.keymap.set('n', '<leader>k', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
+vim.keymap.set('n', '<leader><TAB>', '<cmd>bnext<CR>', { desc = 'Go to next buffer' })
+vim.keymap.set('n', '<leader><S-TAB>', '<cmd>bNext<CR>', { desc = 'Go to previous buffer' })
