@@ -118,6 +118,14 @@ return {
       {
         type = 'python',
         request = 'launch',
+        name = 'Launch Current File',
+        console = 'integratedTerminal',
+        -- cwd = '${workspaceFolder}',
+        program = '${file}',
+      },
+      {
+        type = 'python',
+        request = 'launch',
         name = 'Launch Filepath',
         console = 'integratedTerminal',
         -- module = 'src', -- edit this to be your app's main module
@@ -125,14 +133,6 @@ return {
         program = function()
           return vim.fn.input('File Path: ', vim.fn.getcwd() .. '/', 'file')
         end,
-      },
-      {
-        type = 'python',
-        request = 'launch',
-        name = 'Launch Current File',
-        console = 'integratedTerminal',
-        -- cwd = '${workspaceFolder}',
-        program = '${file}',
       },
     }
 
