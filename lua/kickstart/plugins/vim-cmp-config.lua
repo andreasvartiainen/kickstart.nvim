@@ -49,6 +49,15 @@ return { -- Autocompletion
     local luasnip = require 'luasnip'
     luasnip.config.setup {}
 
+    -- makes htmldjango snippets to be extended with html snippets
+    -- having htmldjango in languages part of package.json of friendly-snippets
+    -- causes double snippet elements
+    -- so remove that, kind of a hack
+    -- this probabbly should work without this but I don't know why it is broken now
+    require('luasnip').filetype_extend('htmldjango', { 'html' })
+    -- load my snippets
+    require('luasnip.loaders.from_vscode').lazy_load { paths = { './my_snippets' } }
+
     cmp.setup {
       snippet = {
         expand = function(args)
