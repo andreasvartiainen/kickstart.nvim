@@ -7,9 +7,7 @@
 -- kickstart.nvim and not kitchen-sink.nvim ;)
 
 return {
-  -- NOTE: Yes, you can install new plugins here!
   'mfussenegger/nvim-dap',
-  -- NOTE: And you can specify dependencies as well
   dependencies = {
     -- Creates a beautiful debugger UI
     'rcarriga/nvim-dap-ui',
@@ -25,6 +23,7 @@ return {
     'mfussenegger/nvim-dap-python',
     'leoluz/nvim-dap-go',
   },
+
   keys = function(_, keys)
     local dap = require 'dap'
     local dapui = require 'dapui'
@@ -47,6 +46,7 @@ return {
       unpack(keys),
     }
   end,
+
   config = function()
     local dap = require 'dap'
     local dapui = require 'dapui'
@@ -66,7 +66,6 @@ return {
         -- Update this to ensure that you have the debuggers for the langs you want
         'cpptools',
         'python',
-        -- 'delve',
       },
     }
 
