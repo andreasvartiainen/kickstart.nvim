@@ -104,16 +104,9 @@ return {
     --     detached = vim.fn.has 'win32' == 0,
     --   },
     -- }
+
     require('dap-python').setup 'python'
 
-    -- table.insert(require('dap').configurations.python, {
-    --   type = 'python',
-    --   request = 'launch',
-    --   name = 'Module',
-    --   console = 'externalTerminal',
-    --   module = 'src', -- edit this to be your app's main module
-    --   cwd = '${workspaceFolder}',
-    -- })
     dap.configurations.python = {
       {
         type = 'python',
@@ -135,46 +128,5 @@ return {
         end,
       },
     }
-
-    -- NOTE: if cpp debugging doesn't work check with :Mason that the debugger is installed
-
-    -- setup cpp adapter
-    -- dap.adapters.cpptools = {
-    --   name = 'cpptools',
-    --   type = 'executable',
-    --   command = vim.fn.stdpath 'data' .. '/mason/packages/cpptools/extension/debugAdapters/bin/OpenDebugAD7',
-    --   options = {
-    --     detached = false,
-    --   },
-    -- }
-    -- this configuration should start cpptools and the debug the executable main in the current directory when executing :DapContinue
-    -- dap.configurations.cpp = {
-    --   {
-    --     name = 'Launch',
-    --     type = 'cpptools',
-    --     request = 'launch',
-    --     -- MIDebuggerPath = 'lldb-mi',
-    --     program = '${workspaceFolder}/main.exe',
-    --     cwd = '${workspaceFolder}',
-    --     stopOnEntry = true,
-    --     args = {},
-    --     runInTerminal = false,
-    --     -- program = function()
-    --     --   return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
-    --     -- end,
-    --   },
-    -- }
-    -- dap.configurations.c = {
-    --   {
-    --     name = 'Launch',
-    --     type = 'cpptools',
-    --     request = 'launch',
-    --     program = '${workspaceFolder}/main.exe',
-    --     cwd = '${workspaceFolder}',
-    --     stopOnEntry = true,
-    --     args = {},
-    --     runInTerminal = false,
-    --   },
-    -- }
   end,
 }
