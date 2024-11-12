@@ -43,7 +43,8 @@ return {
       },
       -- Toggle to see last session result. Without this, you can't see session output in case of unhandled exception.
       { '<F7>', dapui.toggle, desc = 'Debug: See last session result.' },
-      unpack(keys),
+      -- newest lua uses table.unpack instead of unpack
+      table.unpack(keys),
     }
   end,
 

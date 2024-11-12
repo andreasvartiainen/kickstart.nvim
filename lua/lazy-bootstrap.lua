@@ -1,7 +1,5 @@
 -- :NOTE: installs the lazy plugin manager if not installed yet
 --  lazy-bootstrap.lua
---
---
 local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
   local lazyrepo = 'https://github.com/folke/lazy.nvim.git'
