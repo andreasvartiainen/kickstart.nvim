@@ -24,12 +24,7 @@ require('lazy').setup({
   require 'kickstart.plugins.heirline', -- zeioth heirline components
   require 'kickstart.plugins.presence', -- plugin for discord rich presence
   require 'kickstart.plugins.vimtex-config',
-  {
-    'norcalli/nvim-colorizer.lua',
-    config = function()
-      require('colorizer').setup()
-    end,
-  }, -- hex
+  require 'kickstart.plugins.colorizer-config',
   { 'echasnovski/mini.bufremove', version = '*' }, -- for some reason this works better than enabling it in mini config
   { 'kylechui/nvim-surround', version = '*', event = 'VeryLazy', config = true },
   { 'Bilal2453/luvit-meta', lazy = true },
