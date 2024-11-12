@@ -18,14 +18,14 @@ require('lazy').setup({
   require 'kickstart.plugins.vim-cmp-config', -- autocomplete
   require 'kickstart.plugins.theme-config', -- theme for the editor configured here
   require 'kickstart.plugins.mini-config', -- library of lua modules to improve Neovim
-  require 'kickstart.plugins.treesitter-config', -- Parser generator tool for updating syntax as the source is edited
+  require 'kickstart.plugins.treesitter-config', -- updating syntax as the source is edited
   require 'kickstart.plugins.lazygit', -- remember to install lazygit for your system
   require 'kickstart.plugins.cmake_tools',
   require 'kickstart.plugins.heirline', -- zeioth heirline components
   require 'kickstart.plugins.presence', -- plugin for discord rich presence
   require 'kickstart.plugins.vimtex-config',
   require 'kickstart.plugins.colorizer-config',
-  { 'echasnovski/mini.bufremove', version = '*' }, -- for some reason this works better than enabling it in mini config
+  { 'echasnovski/mini.bufremove', version = '*' }, -- setting in mini-config didn't work
   { 'kylechui/nvim-surround', version = '*', event = 'VeryLazy', config = true },
   { 'Bilal2453/luvit-meta', lazy = true },
   { 'folke/todo-comments.nvim', event = 'VimEnter', dependencies = { 'nvim-lua/plenary.nvim' }, opts = { signs = false } }, -- Highlight todo, notes, etc in comments
@@ -35,8 +35,6 @@ require('lazy').setup({
   -- { import = 'custom.plugins' },
 }, {
   ui = {
-    -- If you are using a Nerd Font: set icons to an empty table which will use the
-    -- default lazy.nvim defined Nerd Font icons, otherwise define a unicode icons table
     icons = vim.g.have_nerd_font and {} or {
       cmd = '⌘',
       config = '🛠',
