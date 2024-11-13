@@ -1,4 +1,13 @@
 -- Shows how to use the DAP plugin to debug your code.
+
+local js_based_languages = {
+  'typescript',
+  'javascript',
+  'typescriptreact',
+  'javascriptreact',
+  'vue',
+}
+
 return {
   'mfussenegger/nvim-dap',
   dependencies = {
@@ -11,10 +20,29 @@ return {
     -- Installs the debug adapters for you
     'williamboman/mason.nvim',
     'jay-babu/mason-nvim-dap.nvim',
+    {
+      'microsoft/vscode-js-debug',
+      build = 'npm install --legacy-peer-deps && npx gulp vsDebugServerBundle && mv dist out',
+    },
 
     -- Add your own debuggers here
     'mfussenegger/nvim-dap-python',
     'leoluz/nvim-dap-go',
+    {
+      'mxsdev/nvim-dap-vscode-js',
+      config = function()
+        require('dap-vscode-js').setup {
+          debugger_path = vim.fn.resolve(vim.fn.stdpath 'data' .. '/lazy/vscode-js-debug'),
+          adapters = {
+            'chrome',
+            'pwa-node',
+            'pwa-chrome',
+            'pwa-msedge',
+            'pwa-extensionHost',
+          },
+        }
+      end,
+    },
   },
 
   keys = function(_, keys)
@@ -87,6 +115,20 @@ return {
     dap.listeners.before.event_exited['dapui_config'] = dapui.close
 
     require('dap-python').setup 'python'
+
+    for _, language in ipairs(js_based_languages) do
+      dap.configurations[language] = {
+        -- debug single file
+        {
+          type = 'pwa-node',
+          request = 'launch',
+          name = 'Launch file',
+          program = '${file}',
+          cwd = '${workspaceFolder}',
+          sourceMaps = true,
+        },
+      }
+    end
 
     dap.configurations.python = {
       {
