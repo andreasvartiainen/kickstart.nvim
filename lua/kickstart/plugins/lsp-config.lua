@@ -70,6 +70,9 @@ return {
         -- Show info about function or variable under the cursor
         map('gh', vim.lsp.buf.hover, '[H]over')
 
+        -- show error messages and diagnostic in floating window
+        map('<leader>e', vim.diagnostic.open_float, 'Show error')
+
         -- The following two autocommands are used to highlight references of the
         -- word under your cursor when your cursor rests there for a little while.
         --    See `:help CursorHold` for information about when this is executed
