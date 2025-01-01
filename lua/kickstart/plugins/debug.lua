@@ -117,18 +117,35 @@ return {
     require('dap-python').setup 'python'
 
     for _, language in ipairs(js_based_languages) do
-      dap.configurations[language] = {
-        -- debug single file
-        {
-          type = 'pwa-node',
-          request = 'launch',
-          name = 'Launch file',
-          program = '${file}',
-          console = 'integratedTerminal',
-          cwd = '${workspaceFolder}',
-          sourceMaps = true,
-        },
-      }
+      if language == 'typescript' then
+        dap.configurations[language] = {
+          -- debug single file
+          {
+            type = 'pwa-node',
+            request = 'launch',
+            name = 'Launch TS file',
+            runtimeExecutable = 'tsx',
+            runtimeArgs = '',
+            program = '${file}',
+            console = 'integratedTerminal',
+            cwd = '${workspaceFolder}',
+            sourceMaps = true,
+          },
+        }
+      else
+        dap.configurations[language] = {
+          -- debug single file
+          {
+            type = 'pwa-node',
+            request = 'launch',
+            name = 'Launch file',
+            program = '${file}',
+            console = 'integratedTerminal',
+            cwd = '${workspaceFolder}',
+            sourceMaps = true,
+          },
+        }
+      end
     end
 
     dap.configurations.python = {
