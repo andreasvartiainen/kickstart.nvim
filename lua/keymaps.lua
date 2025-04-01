@@ -24,3 +24,4 @@ vim.keymap.set('n', '<leader><TAB>', '<cmd>bnext<CR>', { desc = 'Go to next buff
 vim.keymap.set('n', '<leader><S-TAB>', '<cmd>bNext<CR>', { desc = 'Go to previous buffer' })
 -- vim.keymap.set('n', '<leader>q', ':bp<bar>sp<bar>bn<bar>bd<CR>', { desc = 'Close buffer' })
 vim.keymap.set('n', '<leader>q', ':bNext<bar>bd#<CR>', { desc = 'Close buffer' })
+vim.keymap.set('v', '<leader>s', 'y/<C-R>"<CR>N', { desc = 'Search selected text' })
