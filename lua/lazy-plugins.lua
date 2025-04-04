@@ -4,6 +4,8 @@
 -- NOTE: Here is where you install your plugins.
 require('lazy').setup({
   'tpope/vim-sleuth', -- Detect tabstop and shiftwidth automatically
+  require 'kickstart.plugins.overseer-config',
+  require 'kickstart.plugins.toggleterm-config',
   require 'kickstart.plugins.debug',
   require 'kickstart.plugins.indent_line',
   require 'kickstart.plugins.lint',
@@ -25,7 +27,7 @@ require('lazy').setup({
   require 'kickstart.plugins.presence', -- plugin for discord rich presence
   require 'kickstart.plugins.vimtex-config',
   require 'kickstart.plugins.colorizer-config',
-  { 'LunarVim/bigfile.nvim' },
+  require 'kickstart.plugins.micropython',
   { 'echasnovski/mini.bufremove', version = '*' }, -- setting in mini-config didn't work
   { 'kylechui/nvim-surround', version = '*', event = 'VeryLazy', config = true },
   { 'Bilal2453/luvit-meta', lazy = true },
