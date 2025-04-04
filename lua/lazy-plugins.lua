@@ -27,6 +27,7 @@ require('lazy').setup({
   require 'kickstart.plugins.presence', -- plugin for discord rich presence
   require 'kickstart.plugins.vimtex-config',
   require 'kickstart.plugins.colorizer-config',
+  require 'kickstart.plugins.micropython',
   { 'echasnovski/mini.bufremove', version = '*' }, -- setting in mini-config didn't work
   { 'kylechui/nvim-surround', version = '*', event = 'VeryLazy', config = true },
   { 'Bilal2453/luvit-meta', lazy = true },
