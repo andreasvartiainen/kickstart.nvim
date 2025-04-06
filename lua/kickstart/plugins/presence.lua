@@ -15,7 +15,7 @@ return {
     show_time = true, -- Show the timer
     global_timer = false, -- if set true, timer won't update when any event are triggered
     -- Rich Presence text options
-    editing_text = 'Editing', -- Format string rendered when an editable file is loaded in the buffer (either string or function(filename: string): string)
+    editing_text = 'Wasting life away', -- Format string rendered when an editable file is loaded in the buffer (either string or function(filename: string): string)
     -- file_explorer_text = 'Browsing %s', -- Format string rendered when browsing a file explorer (either string or function(file_explorer_name: string): string)
     file_explorer_text = 'Browsing', -- Format string rendered when browsing a file explorer (either string or function(file_explorer_name: string): string)
     git_commit_text = 'Committing changes', -- Format string rendered when committing changes in git (either string or function(filename: string): string)
