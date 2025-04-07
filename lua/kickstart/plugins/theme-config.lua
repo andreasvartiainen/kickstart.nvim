@@ -23,9 +23,9 @@ return { -- You can easily change to a different colorscheme.
   end,
   opts = {
     on_highlights = function(hl)
-      hl.comment = { fg = '#00dd77' }
-      hl.perlComment = { fg = '#00dd77' }
-      hl.Comment = { fg = '#00dd77' }
+      hl.comment = { fg = '#9999bb' }
+      hl.perlComment = { fg = '#9999bb' }
+      hl.Comment = { fg = '#9999bb' }
     end,
   },
 }
