@@ -80,7 +80,7 @@ return {
         },
       },
       cmake_runner = { -- runner to use
-        name = 'terminal', -- name of the runner
+        name = 'toggleterm', -- name of the runner
         opts = {}, -- the options the runner will get, possible values depend on the runner type. See `default_opts` for possible values.
         default_opts = { -- a list of default and possible values for runners
           quickfix = {

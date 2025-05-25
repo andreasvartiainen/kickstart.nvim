@@ -16,9 +16,9 @@ require('lazy').setup({
   require 'kickstart.plugins.fuzzy-finder',
   require 'kickstart.plugins.venv-selector-config', -- plugin for selecting python envs
   require 'kickstart.plugins.lsp-config', -- language server configuration
-  require 'kickstart.plugins.autoformat', -- autoformatting
+  -- require 'kickstart.plugins.autoformat', -- autoformatting
   require 'kickstart.plugins.vim-cmp-config', -- autocomplete
-  require 'kickstart.plugins.theme-config', -- theme for the editor configured here
+  require 'kickstart.plugins.theme', -- theme for the editor configured here
   require 'kickstart.plugins.mini-config', -- library of lua modules to improve Neovim
   require 'kickstart.plugins.treesitter-config', -- updating syntax as the source is edited
   require 'kickstart.plugins.lazygit', -- remember to install lazygit for your system

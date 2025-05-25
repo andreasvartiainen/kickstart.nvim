@@ -1,8 +1,18 @@
 return {
-  'rebelot/heirline.nvim',
-  dependencies = { 'zeioth/heirline-components.nvim' },
+	'rebelot/heirline.nvim',
+	-- require some readymade components
+	dependencies = {
+		"Zeioth/heirline-components.nvim"
+	},
   opts = function()
+    -- Setup
     local lib = require 'heirline-components.all'
+		local heirline = require 'heirline'
+    local heirline_components = require 'heirline-components.all'
+    heirline_components.init.subscribe_to_events()
+    heirline.load_colors(heirline_components.hl.get_colors())
+
+		-- options
     return {
       opts = {
         disable_winbar_cb = function(args) -- We do this to avoid showing it on the greeter.
@@ -15,9 +25,9 @@ return {
         end,
       },
       tabline = { -- UI upper bar
-        lib.component.tabline_conditional_padding(),
-        lib.component.tabline_tabpages(),
-        lib.component.tabline_buffers(),
+        -- lib.component.tabline_conditional_padding(),
+        -- lib.component.tabline_tabpages(),
+        -- lib.component.tabline_buffers(),
         -- lib.component.fill { hl = { bg = 'tabline_bg' } },
       },
       winbar = { -- UI breadcrumbs bar
@@ -75,14 +85,5 @@ return {
         lib.component.mode { surround = { separator = 'right' } },
       },
     }
-  end,
-  config = function(_, opts)
-    local heirline = require 'heirline'
-    local heirline_components = require 'heirline-components.all'
-
-    -- Setup
-    heirline_components.init.subscribe_to_events()
-    heirline.load_colors(heirline_components.hl.get_colors())
-    heirline.setup(opts)
   end,
 }
