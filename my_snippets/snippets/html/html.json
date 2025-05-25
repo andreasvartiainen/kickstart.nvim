@@ -1,0 +1,22 @@
+{
+    "html5": {
+        "prefix": "htmlt",
+        "body": [
+            "<!DOCTYPE html>",
+            "<html lang=\"$1en\">",
+            "\t<head>",
+            "\t\t<meta charset=\"UTF-8\">",
+            "\t\t<meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">",
+            "\t\t<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">",
+            "\t\t<title>$2</title>",
+            "\t\t<link href=\"$3css/style.css\" rel=\"stylesheet\">",
+            "\t</head>",
+            "\t<body>",
+            "\t$0",
+            "\t</body>",
+            "</html>"
+        ],
+        "description": "HTML - Defines a template for a html document",
+        "scope": "text.html"
+    }
+}

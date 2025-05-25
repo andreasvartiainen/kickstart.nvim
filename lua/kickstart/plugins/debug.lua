@@ -1,15 +1,15 @@
--- debug.lua
---
 -- Shows how to use the DAP plugin to debug your code.
---
--- Primarily focused on configuring the debugger for Go, but can
--- be extended to other languages as well. That's why it's called
--- kickstart.nvim and not kitchen-sink.nvim ;)
+
+local js_based_languages = {
+  'typescript',
+  'javascript',
+  'typescriptreact',
+  'javascriptreact',
+  'vue',
+}
 
 return {
-  -- NOTE: Yes, you can install new plugins here!
   'mfussenegger/nvim-dap',
-  -- NOTE: And you can specify dependencies as well
   dependencies = {
     -- Creates a beautiful debugger UI
     'rcarriga/nvim-dap-ui',
@@ -20,11 +20,31 @@ return {
     -- Installs the debug adapters for you
     'williamboman/mason.nvim',
     'jay-babu/mason-nvim-dap.nvim',
+    {
+      'microsoft/vscode-js-debug',
+      build = 'npm install --legacy-peer-deps && npx gulp vsDebugServerBundle && mv dist out',
+    },
 
     -- Add your own debuggers here
     'mfussenegger/nvim-dap-python',
     'leoluz/nvim-dap-go',
+    {
+      'mxsdev/nvim-dap-vscode-js',
+      config = function()
+        require('dap-vscode-js').setup {
+          debugger_path = vim.fn.resolve(vim.fn.stdpath 'data' .. '/lazy/vscode-js-debug'),
+          adapters = {
+            'chrome',
+            'pwa-node',
+            'pwa-chrome',
+            'pwa-msedge',
+            'pwa-extensionHost',
+          },
+        }
+      end,
+    },
   },
+
   keys = function(_, keys)
     local dap = require 'dap'
     local dapui = require 'dapui'
@@ -44,9 +64,11 @@ return {
       },
       -- Toggle to see last session result. Without this, you can't see session output in case of unhandled exception.
       { '<F7>', dapui.toggle, desc = 'Debug: See last session result.' },
-      unpack(keys),
+      -- newest lua uses table.unpack instead of unpack
+      table.unpack(keys),
     }
   end,
+
   config = function()
     local dap = require 'dap'
     local dapui = require 'dapui'
@@ -66,16 +88,12 @@ return {
         -- Update this to ensure that you have the debuggers for the langs you want
         'cpptools',
         'python',
-        -- 'delve',
       },
     }
 
     -- Dap UI setup
     -- For more information, see |:help nvim-dap-ui|
     dapui.setup {
-      -- Set icons to characters that are more likely to work in every terminal.
-      --    Feel free to remove or use ones that you like more! :)
-      --    Don't feel like these are good choices.
       icons = { expanded = '▾', collapsed = '▸', current_frame = '*' },
       controls = {
         icons = {
@@ -96,25 +114,49 @@ return {
     dap.listeners.before.event_terminated['dapui_config'] = dapui.close
     dap.listeners.before.event_exited['dapui_config'] = dapui.close
 
-    -- Install golang specific config
-    -- require('dap-go').setup {
-    --   delve = {
-    --     -- On Windows delve must be run attached or it crashes.
-    --     -- See https://github.com/leoluz/nvim-dap-go/blob/main/README.md#configuring
-    --     detached = vim.fn.has 'win32' == 0,
-    --   },
-    -- }
     require('dap-python').setup 'python'
 
-    -- table.insert(require('dap').configurations.python, {
-    --   type = 'python',
-    --   request = 'launch',
-    --   name = 'Module',
-    --   console = 'externalTerminal',
-    --   module = 'src', -- edit this to be your app's main module
-    --   cwd = '${workspaceFolder}',
-    -- })
+    for _, language in ipairs(js_based_languages) do
+      if language == 'typescript' then
+        dap.configurations[language] = {
+          -- debug single file
+          {
+            type = 'pwa-node',
+            request = 'launch',
+            name = 'Launch TS file',
+            runtimeExecutable = 'tsx',
+            runtimeArgs = '',
+            program = '${file}',
+            console = 'integratedTerminal',
+            cwd = '${workspaceFolder}',
+            sourceMaps = true,
+          },
+        }
+      else
+        dap.configurations[language] = {
+          -- debug single file
+          {
+            type = 'pwa-node',
+            request = 'launch',
+            name = 'Launch file',
+            program = '${file}',
+            console = 'integratedTerminal',
+            cwd = '${workspaceFolder}',
+            sourceMaps = true,
+          },
+        }
+      end
+    end
+
     dap.configurations.python = {
+      {
+        type = 'python',
+        request = 'launch',
+        name = 'Launch Current File',
+        console = 'integratedTerminal',
+        -- cwd = '${workspaceFolder}',
+        program = '${file}',
+      },
       {
         type = 'python',
         request = 'launch',
@@ -126,55 +168,6 @@ return {
           return vim.fn.input('File Path: ', vim.fn.getcwd() .. '/', 'file')
         end,
       },
-      {
-        type = 'python',
-        request = 'launch',
-        name = 'Launch Current File',
-        console = 'integratedTerminal',
-        -- cwd = '${workspaceFolder}',
-        program = '${file}',
-      },
     }
-
-    -- NOTE: if cpp debugging doesn't work check with :Mason that the debugger is installed
-
-    -- setup cpp adapter
-    -- dap.adapters.cpptools = {
-    --   name = 'cpptools',
-    --   type = 'executable',
-    --   command = vim.fn.stdpath 'data' .. '/mason/packages/cpptools/extension/debugAdapters/bin/OpenDebugAD7',
-    --   options = {
-    --     detached = false,
-    --   },
-    -- }
-    -- this configuration should start cpptools and the debug the executable main in the current directory when executing :DapContinue
-    -- dap.configurations.cpp = {
-    --   {
-    --     name = 'Launch',
-    --     type = 'cpptools',
-    --     request = 'launch',
-    --     -- MIDebuggerPath = 'lldb-mi',
-    --     program = '${workspaceFolder}/main.exe',
-    --     cwd = '${workspaceFolder}',
-    --     stopOnEntry = true,
-    --     args = {},
-    --     runInTerminal = false,
-    --     -- program = function()
-    --     --   return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
-    --     -- end,
-    --   },
-    -- }
-    -- dap.configurations.c = {
-    --   {
-    --     name = 'Launch',
-    --     type = 'cpptools',
-    --     request = 'launch',
-    --     program = '${workspaceFolder}/main.exe',
-    --     cwd = '${workspaceFolder}',
-    --     stopOnEntry = true,
-    --     args = {},
-    --     runInTerminal = false,
-    --   },
-    -- }
   end,
 }

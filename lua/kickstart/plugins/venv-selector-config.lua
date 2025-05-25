@@ -11,7 +11,7 @@ return {
   opts = {
     -- Your options go here
     name = { 'venv', '.venv' },
-    auto_refresh = false,
+    auto_refresh = true,
   },
   keys = {
     { ',v', '<cmd>VenvSelect<cr>' },

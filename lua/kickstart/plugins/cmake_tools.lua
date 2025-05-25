@@ -1,7 +1,7 @@
 return {
   'Civitasv/cmake-tools.nvim',
-  opts = {
-    {
+  config = function()
+    require('cmake-tools').setup {
       cmake_command = 'cmake', -- this is used to specify cmake command path
       ctest_command = 'ctest', -- this is used to specify ctest command path
       cmake_use_preset = true,
@@ -13,9 +13,6 @@ return {
       --       ${kitGenerator}
       --       ${variant:xx}
       cmake_build_directory = function()
-        if require('cmake-tools.osys').iswin32 then
-          return 'out\\${variant:buildType}'
-        end
         return 'out/${variant:buildType}'
       end, -- this is used to specify generate directory for cmake, allows macro expansion, can be a string or a function returning the string, relative to cwd.
       cmake_soft_link_compile_commands = true, -- this will automatically make a soft link from compile commands file to project root dir
@@ -83,7 +80,7 @@ return {
         },
       },
       cmake_runner = { -- runner to use
-        name = 'terminal', -- name of the runner
+        name = 'toggleterm', -- name of the runner
         opts = {}, -- the options the runner will get, possible values depend on the runner type. See `default_opts` for possible values.
         default_opts = { -- a list of default and possible values for runners
           quickfix = {
@@ -136,6 +133,6 @@ return {
         refresh_rate_ms = 100, -- how often to iterate icons
       },
       cmake_virtual_text_support = true, -- Show the target related to current file using virtual text (at right corner)
-    },
-  },
+    }
+  end,
 }
