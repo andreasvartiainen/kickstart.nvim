@@ -1,7 +1,5 @@
--- :NOTE:
---  lazy-plugins.lua
-
--- NOTE: Here is where you install your plugins.
+-- [[ Install `lazy.nvim` plugin manager ]]
+require 'lazy-bootstrap'
 require('lazy').setup({
   'tpope/vim-sleuth', -- Detect tabstop and shiftwidth automatically
   require 'kickstart.plugins.overseer-config',
@@ -33,9 +31,6 @@ require('lazy').setup({
   { 'Bilal2453/luvit-meta', lazy = true },
   { 'folke/todo-comments.nvim', event = 'VimEnter', dependencies = { 'nvim-lua/plenary.nvim' }, opts = { signs = false } }, -- Highlight todo, notes, etc in comments
 
-  -- NOTE:
-  --    For additional information, see `:help lazy.nvim-lazy.nvim-structuring-your-plugins`
-  -- { import = 'custom.plugins' },
 }, {
   ui = {
     icons = vim.g.have_nerd_font and {} or {

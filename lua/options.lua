@@ -28,15 +28,6 @@ vim.schedule(function()
   vim.opt.clipboard = 'unnamedplus'
 end)
 
--- set terminal to powershell
--- vim.g.terminal_emulator = 'powershell'
--- vim.opt.shell = 'powershell.exe'
--- vim.opt.shellcmdflag = '-NoLogo -NoProfile -ExecutionPolicy RemoteSigned -Command '
-vim.opt.shellxquote = ''
-vim.opt.shellquote = ''
-vim.opt.shellredir = '2>&1 | Out-File -Encoding UTF8 %s'
-vim.opt.shellpipe = '2>&1 | Out-File -Encoding UTF8 %s'
-
 -- Enable break indent
 vim.opt.breakindent = true
 
@@ -64,8 +55,8 @@ vim.opt.splitbelow = true
 -- Sets how neovim will display certain whitespace characters in the editor.
 --  See `:help 'list'`
 --  and `:help 'listchars'`
-vim.opt.list = true
-vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
+-- vim.opt.list = true
+-- vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
 vim.opt.expandtab = false
 vim.opt.tabstop = 2
 vim.opt.shiftwidth = 2
@@ -81,10 +72,29 @@ vim.opt.scrolloff = 10
 
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
+vim.api.nvim_create_autocmd({"InsertEnter"}, {
+	pattern = {"*"},
+	callback = function()
+		if vim.bo.filetype == "neo-tree" then
+			return
+		end
+		vim.opt.number = true
+		vim.opt.relativenumber = false
+	end,
+})
+
+vim.api.nvim_create_autocmd({"InsertLeave"}, {
+	pattern = {"*"},
+	callback = function()
+		if vim.bo.filetype == "neo-tree" then
+			return
+		end
+		vim.opt.number = true
+		vim.opt.relativenumber = true
+	end,
+})
 
 -- Highlight when yanking (copying) text
---  Try it with `yap` in normal mode
---  See `:help vim.highlight.on_yank()`
 vim.api.nvim_create_autocmd('TextYankPost', {
   desc = 'Highlight when yanking (copying) text',
   group = vim.api.nvim_create_augroup('kickstart-highlight-yank', { clear = true }),

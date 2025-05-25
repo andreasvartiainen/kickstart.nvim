@@ -9,3 +9,25 @@ vim.api.nvim_create_autocmd('VimEnter', {
   end,
   once = true,
 })
+
+vim.api.nvim_create_autocmd({"InsertEnter"}, {
+	pattern = {"*"},
+	callback = function()
+		if vim.bo.filetype == "neo-tree" then
+			return
+		end
+		vim.opt.number = true
+		vim.opt.relativenumber = false
+	end,
+})
+
+vim.api.nvim_create_autocmd({"InsertLeave"}, {
+	pattern = {"*"},
+	callback = function()
+		if vim.bo.filetype == "neo-tree" then
+			return
+		end
+		vim.opt.number = true
+		vim.opt.relativenumber = true
+	end,
+})
