@@ -1,7 +1,7 @@
 return {
-  'akinsho/toggleterm.nvim',
-  tag = '*',
-  config = function()
-    require('toggleterm').setup()
-  end,
+  {'akinsho/toggleterm.nvim',
+		version = "*",
+		opts = {
+		direction = "float",
+	}},
 }
