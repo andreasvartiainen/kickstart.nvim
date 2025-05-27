@@ -4,11 +4,6 @@ vim.g.maplocalleader = ' '
 
 vim.g.have_nerd_font = false
 
--- [[ Setting options ]]
--- See `:help vim.opt`
--- NOTE: You can change these options as you wish!
---  For more options, you can see `:help option-list`
-
 -- Make line numbers default
 vim.opt.number = true
 vim.opt.relativenumber = true
@@ -20,10 +15,6 @@ vim.opt.mouse = 'a'
 vim.opt.showmode = false
 vim.opt.showtabline = 2
 
--- Sync clipboard between OS and Neovim.
---  Schedule the setting after `UiEnter` because it can increase startup-time.
---  Remove this option if you want your OS clipboard to remain independent.
---  See `:help 'clipboard'`
 vim.schedule(function()
   vim.opt.clipboard = 'unnamedplus'
 end)
@@ -52,11 +43,7 @@ vim.opt.timeoutlen = 300
 vim.opt.splitright = true
 vim.opt.splitbelow = true
 
--- Sets how neovim will display certain whitespace characters in the editor.
---  See `:help 'list'`
---  and `:help 'listchars'`
--- vim.opt.list = true
--- vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
+-- Tab style
 vim.opt.expandtab = false
 vim.opt.tabstop = 2
 vim.opt.shiftwidth = 2
@@ -70,35 +57,5 @@ vim.opt.cursorline = true
 -- Minimal number of screen lines to keep above and below the cursor.
 vim.opt.scrolloff = 10
 
--- [[ Basic Autocommands ]]
---  See `:help lua-guide-autocommands`
-vim.api.nvim_create_autocmd({"InsertEnter"}, {
-	pattern = {"*"},
-	callback = function()
-		if vim.bo.filetype == "neo-tree" then
-			return
-		end
-		vim.opt.number = true
-		vim.opt.relativenumber = false
-	end,
-})
-
-vim.api.nvim_create_autocmd({"InsertLeave"}, {
-	pattern = {"*"},
-	callback = function()
-		if vim.bo.filetype == "neo-tree" then
-			return
-		end
-		vim.opt.number = true
-		vim.opt.relativenumber = true
-	end,
-})
-
--- Highlight when yanking (copying) text
-vim.api.nvim_create_autocmd('TextYankPost', {
-  desc = 'Highlight when yanking (copying) text',
-  group = vim.api.nvim_create_augroup('kickstart-highlight-yank', { clear = true }),
-  callback = function()
-    vim.hl.on_yank()
-  end,
-})
+-- load autocmds
+require("custom.plugins.my_autocmds")

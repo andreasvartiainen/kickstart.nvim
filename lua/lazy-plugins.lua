@@ -1,7 +1,7 @@
 -- [[ Install `lazy.nvim` plugin manager ]]
 require 'lazy-bootstrap'
 require('lazy').setup({
-  'tpope/vim-sleuth', -- Detect tabstop and shiftwidth automatically
+  -- 'tpope/vim-sleuth', -- Detect tabstop and shiftwidth automatically
   require 'kickstart.plugins.overseer-config',
   require 'kickstart.plugins.toggleterm-config',
   require 'kickstart.plugins.debug',
@@ -11,7 +11,7 @@ require('lazy').setup({
   require 'kickstart.plugins.neo-tree',
   require 'kickstart.plugins.gitsigns', -- adds gitsigns recommend keymaps
   require 'kickstart.plugins.which-key', -- shows keys to press after pressing a key
-  require 'kickstart.plugins.fuzzy-finder',
+  require 'kickstart.plugins.telescope-config',
   require 'kickstart.plugins.venv-selector-config', -- plugin for selecting python envs
   require 'kickstart.plugins.lsp-config', -- language server configuration
   -- require 'kickstart.plugins.autoformat', -- autoformatting
@@ -23,9 +23,9 @@ require('lazy').setup({
   require 'kickstart.plugins.cmake_tools',
   require 'kickstart.plugins.heirline', -- zeioth heirline components
   require 'kickstart.plugins.presence', -- plugin for discord rich presence
-  require 'kickstart.plugins.vimtex-config',
+  -- require 'kickstart.plugins.vimtex-config',
   require 'kickstart.plugins.colorizer-config',
-  require 'kickstart.plugins.micropython',
+  -- require 'kickstart.plugins.micropython',
   { 'echasnovski/mini.bufremove', version = '*' }, -- setting in mini-config didn't work
   { 'kylechui/nvim-surround', version = '*', event = 'VeryLazy', config = true },
   { 'Bilal2453/luvit-meta', lazy = true },
