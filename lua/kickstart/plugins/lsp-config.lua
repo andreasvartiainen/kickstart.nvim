@@ -131,6 +131,15 @@ return {
       },
     }
 
+		-- set specific capabilites for servers
+		vim.lsp.config('clangd', {
+			cmd = {"clangd", "--background-index" ,"--clang-tidy"} ,
+			capabilities = {
+				-- fixes the stupid crash when writing åäö
+				offsetEncoding = { "utf-16"},
+			},
+		})
+
     require('mason').setup()
 
     local ensure_installed = vim.tbl_keys(servers or {})

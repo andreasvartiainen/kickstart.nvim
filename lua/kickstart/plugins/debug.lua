@@ -1,5 +1,3 @@
--- Shows how to use the DAP plugin to debug your code.
-
 local js_based_languages = {
   'typescript',
   'javascript',
@@ -11,21 +9,17 @@ local js_based_languages = {
 return {
   'mfussenegger/nvim-dap',
   dependencies = {
-    -- Creates a beautiful debugger UI
     'rcarriga/nvim-dap-ui',
-
-    -- Required dependency for nvim-dap-ui
     'nvim-neotest/nvim-nio',
 
-    -- Installs the debug adapters for you
     'williamboman/mason.nvim',
     'jay-babu/mason-nvim-dap.nvim',
+
     {
       'microsoft/vscode-js-debug',
       build = 'npm install --legacy-peer-deps && npx gulp vsDebugServerBundle && mv dist out',
     },
 
-    -- Add your own debuggers here
     'mfussenegger/nvim-dap-python',
     'leoluz/nvim-dap-go',
     {
@@ -45,7 +39,7 @@ return {
     },
   },
 
-  keys = function(_, keys)
+  keys = function()
     local dap = require 'dap'
     local dapui = require 'dapui'
     return {
@@ -64,15 +58,12 @@ return {
       },
       -- Toggle to see last session result. Without this, you can't see session output in case of unhandled exception.
       { '<F7>', dapui.toggle, desc = 'Debug: See last session result.' },
-      -- newest lua uses table.unpack instead of unpack
-      table.unpack(keys),
     }
   end,
 
   config = function()
     local dap = require 'dap'
     local dapui = require 'dapui'
-
     require('mason-nvim-dap').setup {
       -- Makes a best effort to setup the various debuggers with
       -- reasonable debug configurations
@@ -93,23 +84,9 @@ return {
 
     -- Dap UI setup
     -- For more information, see |:help nvim-dap-ui|
-    dapui.setup {
-      icons = { expanded = '▾', collapsed = '▸', current_frame = '*' },
-      controls = {
-        icons = {
-          pause = '⏸',
-          play = '▶',
-          step_into = '⏎',
-          step_over = '⏭',
-          step_out = '⏮',
-          step_back = 'b',
-          run_last = '▶▶',
-          terminate = '⏹',
-          disconnect = '⏏',
-        },
-      },
-    }
+    dapui.setup {}
 
+		-- listeners to exit and enter dapui automatically
     dap.listeners.after.event_initialized['dapui_config'] = dapui.open
     dap.listeners.before.event_terminated['dapui_config'] = dapui.close
     dap.listeners.before.event_exited['dapui_config'] = dapui.close
